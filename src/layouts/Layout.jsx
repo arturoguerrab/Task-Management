@@ -26,7 +26,7 @@ const Layout = () => {
 
 	return (
 		<DashboardLayout>
-			<PageContainer>
+			<PageContainer maxWidth="xl">
 				<Outlet />
 			</PageContainer>
 		</DashboardLayout>

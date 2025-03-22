@@ -10,6 +10,7 @@ import {
 	onAuthStateChanged,
 } from "./firebase/auth";
 import SessionContext from "./SessionContext";
+import { createTheme } from "@mui/material";
 
 const NAVIGATION = [
 	{
@@ -21,16 +22,26 @@ const NAVIGATION = [
 		icon: <DashboardIcon />,
 	},
 	{
-		segment: "stores",
-		title: "Stores",
+		segment: "tiendas",
+		title: "hola",
 		icon: <ShoppingCartIcon />,
 	},
 ];
 
 const BRANDING = {
-	title: "Task Manager",
-	logo: <img className="w-24 pt-1.5 " src="https://images.weare365.io/filters:format(.webp)/1920x0/store_Logo_6121_cebd1ecf70.png" alt="MUI logo" />
+	title: "",
+	logo: (
+		<img
+			className="w-24 pt-1.5 "
+			src="https://images.weare365.io/filters:format(.webp)/1920x0/store_Logo_6121_cebd1ecf70.png"
+			alt="MUI logo"
+		/>
+	),
 };
+
+const demoTheme = createTheme({
+	colorSchemes: { dark: false },
+  });
 
 const AUTHENTICATION = {
 	signIn: signInWithGoogle,
@@ -76,6 +87,7 @@ function App() {
 			branding={BRANDING}
 			session={session}
 			authentication={AUTHENTICATION}
+			theme={demoTheme}
 		>
 			<SessionContext.Provider value={sessionContextValue}>
 				<Outlet />

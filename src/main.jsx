@@ -21,7 +21,7 @@ const router = createBrowserRouter([
             Component: Dashboard,
           },
           {
-            path: 'stores',
+            path: 'tiendas',
             Component: Stores,
           },
         ],
