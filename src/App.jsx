@@ -5,95 +5,96 @@ import { Outlet } from "react-router";
 
 import * as React from "react";
 import {
-	firebaseSignOut,
-	signInWithGoogle,
-	onAuthStateChanged,
+  firebaseSignOut,
+  signInWithGoogle,
+  onAuthStateChanged,
 } from "./firebase/auth";
 import SessionContext from "./SessionContext";
 import { createTheme } from "@mui/material";
 
 const NAVIGATION = [
-	{
-		kind: "header",
-		title: "Main items",
-	},
-	{
-		title: "Dashboard",
-		icon: <DashboardIcon />,
-	},
-	{
-		segment: "tiendas",
-		title: "hola",
-		icon: <ShoppingCartIcon />,
-	},
+  {
+    kind: "header",
+    title: "Main items",
+  },
+  {
+    title: "Dashboard",
+    icon: <DashboardIcon />,
+  },
+  {
+    segment: "tiendas",
+    title: "Tiendas",
+    icon: <ShoppingCartIcon />,
+  },
 ];
 
 const BRANDING = {
-	title: "",
-	logo: (
-		<img
-			className="w-24 pt-1.5 "
-			src="https://images.weare365.io/filters:format(.webp)/1920x0/store_Logo_6121_cebd1ecf70.png"
-			alt="MUI logo"
-		/>
-	),
+  title: "",
+  logo: (
+    <img
+      className="w-24 pt-1.5 "
+      src="https://images.weare365.io/filters:format(.webp)/1920x0/store_Logo_6121_cebd1ecf70.png"
+      alt="MUI logo"
+    />
+  ),
 };
 
 const demoTheme = createTheme({
-	colorSchemes: { dark: false },
-  });
+  colorSchemes: { dark: false },
+  typography: { fontFamily: ["Lato"] },
+});
 
 const AUTHENTICATION = {
-	signIn: signInWithGoogle,
-	signOut: firebaseSignOut,
+  signIn: signInWithGoogle,
+  signOut: firebaseSignOut,
 };
 
 function App() {
-	const [session, setSession] = React.useState(null);
-	const [loading, setLoading] = React.useState(true);
+  const [session, setSession] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
 
-	const sessionContextValue = React.useMemo(
-		() => ({
-			session,
-			setSession,
-			loading,
-		}),
-		[session, loading]
-	);
+  const sessionContextValue = React.useMemo(
+    () => ({
+      session,
+      setSession,
+      loading,
+    }),
+    [session, loading]
+  );
 
-	React.useEffect(() => {
-		// Returns an `unsubscribe` function to be called during teardown
-		const unsubscribe = onAuthStateChanged((user) => {
-			if (user) {
-				setSession({
-					user: {
-						name: user.displayName || "",
-						email: user.email || "",
-						image: user.photoURL || "",
-					},
-				});
-			} else {
-				setSession(null);
-			}
-			setLoading(false);
-		});
+  React.useEffect(() => {
+    // Returns an `unsubscribe` function to be called during teardown
+    const unsubscribe = onAuthStateChanged((user) => {
+      if (user) {
+        setSession({
+          user: {
+            name: user.displayName || "",
+            email: user.email || "",
+            image: user.photoURL || "",
+          },
+        });
+      } else {
+        setSession(null);
+      }
+      setLoading(false);
+    });
 
-		return () => unsubscribe();
-	}, []);
+    return () => unsubscribe();
+  }, []);
 
-	return (
-		<ReactRouterAppProvider
-			navigation={NAVIGATION}
-			branding={BRANDING}
-			session={session}
-			authentication={AUTHENTICATION}
-			theme={demoTheme}
-		>
-			<SessionContext.Provider value={sessionContextValue}>
-				<Outlet />
-			</SessionContext.Provider>
-		</ReactRouterAppProvider>
-	);
+  return (
+    <ReactRouterAppProvider
+      navigation={NAVIGATION}
+      branding={BRANDING}
+      session={session}
+      authentication={AUTHENTICATION}
+      theme={demoTheme}
+    >
+      <SessionContext.Provider value={sessionContextValue}>
+        <Outlet />
+      </SessionContext.Provider>
+    </ReactRouterAppProvider>
+  );
 }
 
 export default App;
