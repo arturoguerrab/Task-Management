@@ -11,6 +11,7 @@ import {
 } from "./firebase/auth";
 import SessionContext from "./SessionContext";
 import { createTheme } from "@mui/material";
+import DataContextProvider from "./DataContextProvider";
 
 const NAVIGATION = [
   {
@@ -20,12 +21,13 @@ const NAVIGATION = [
   {
     title: "Dashboard",
     icon: <DashboardIcon />,
+    
   },
-  {
-    segment: "tiendas",
-    title: "Tiendas",
-    icon: <ShoppingCartIcon />,
-  },
+  // {
+  //   segment: "store",
+  //   title: "store",
+  //   icon: <ShoppingCartIcon />,
+  // },
 ];
 
 const BRANDING = {
@@ -91,7 +93,9 @@ function App() {
       theme={demoTheme}
     >
       <SessionContext.Provider value={sessionContextValue}>
-        <Outlet />
+        <DataContextProvider>
+          <Outlet/>
+        </DataContextProvider>
       </SessionContext.Provider>
     </ReactRouterAppProvider>
   );

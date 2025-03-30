@@ -13,15 +13,15 @@ const router = createBrowserRouter([
     Component: App, // root layout route
     children: [
       {
-        path: '/',
+        path: '',
         Component: Layout,
         children: [
           {
-            path: '',
+            path: '/',
             Component: Dashboard,
           },
           {
-            path: 'tiendas',
+            path: '/store/:storeId',
             Component: Stores,
           },
         ],
