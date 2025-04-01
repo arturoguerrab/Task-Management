@@ -7,6 +7,8 @@ import Layout from "./layouts/Layout.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Stores from "./pages/Stores.jsx";
 import SignInPage from './pages/SignIn.jsx';
+import Staff from "./pages/Staff.jsx";
+import Notes from "./pages/Notes.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
           {
             path: '/store/:storeId',
             Component: Stores,
+          },
+          {
+            path: '/staff',
+            Component: Staff,
+          },
+          {
+            path: '/notes',
+            Component: Notes,
           },
         ],
       },

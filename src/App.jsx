@@ -1,5 +1,6 @@
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import HomeIcon from '@mui/icons-material/Home';
+import GroupsIcon from '@mui/icons-material/Groups';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { ReactRouterAppProvider } from "@toolpad/core/react-router";
 import { Outlet } from "react-router";
 
@@ -19,8 +20,20 @@ const NAVIGATION = [
     title: "Main items",
   },
   {
-    title: "Dashboard",
-    icon: <DashboardIcon />,
+    title: "Locales",
+    icon: <HomeIcon />,
+    
+  },
+  {
+    segment: "staff",
+    title: "Equipo",
+    icon: <GroupsIcon />,
+    
+  },
+  {
+    segment: "notes",
+    title: "Notas",
+    icon: <FormatListBulletedIcon />,
     
   },
   // {
